@@ -1,10 +1,16 @@
 module Types where
 
-data Type = IntType | StrType | OpType | BlnType
+data Type = IntType | StrType | OpType | BlnType | HghType | LowType
   deriving (Eq, Show)
 
 ops :: [String]
 ops = ["+", "-", "*", "/", "print", "put", "dup", "!", "2dup", "swap", "over", "=", "|", "&", "<", ">", "<=", ">="]
+
+highers :: [String]
+highers = ["if"]
+
+lowers :: [String]
+lowers = ["end"]
 
 type Token = (Type, String, Loc)
 
@@ -25,8 +31,10 @@ formatLexedInfo ((typ, val, loc) : rest) = info ++ formatLexedInfo rest
 getType :: String -> Loc -> Type
 getType str loc
   | isNumerical str = IntType
-  | str `elem` ops = OpType
   | str `elem` ["True", "False"] = BlnType
+  | str `elem` highers = HghType
+  | str `elem` lowers = LowType
+  | str `elem` ops = OpType
   | otherwise = libraError ("Can't determine type for \"" ++ str ++ "\"") (Just loc)
   where
     isNumerical :: String -> Bool

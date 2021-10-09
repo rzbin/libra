@@ -14,4 +14,4 @@ handleInput :: String -> String -> IO ()
 handleInput str fileName = putStr $ concat out
   where
     lexed = lexer str (fileName, 1, 1)
-    out = trace (formatLexedInfo lexed) $ eval [] lexed
+    out = trace (formatLexedInfo lexed) $ eval [] lexed []
