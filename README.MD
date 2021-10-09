@@ -117,12 +117,6 @@ HelloWorld
 ```
 
 #### Logic
-- `=` : Tests equality on the top two stack elements
-```pascal
-True False = print
-```
-yields `False`
-
 - `!` : Negates the top stack element
 ```pascal
 False ! print
@@ -138,6 +132,37 @@ yields `True`
 - `&` : Logical AND's the top two stack elements
 ```pascal
 True False & print
+```
+yields `False`
+
+#### Comparison
+- `=` : Tests equality on the top two stack elements
+```pascal
+True False = print
+```
+yields `False`
+
+- `<` : Tests if the second stack element is smaller than the top stack element
+```pascal
+2 5 < print
+```
+yields `True`
+
+- `<` : Tests if the second stack element is greater than the top stack element
+```pascal
+2 5 > print
+```
+yields `False`
+
+- `<=` : Tests if the second stack element is smaller than or equal to the top stack element
+```pascal
+2 5 <= print
+```
+yields `True`
+
+- `<=` : Tests if the second stack element is greater than or equal to the top stack element
+```pascal
+2 5 >= print
 ```
 yields `False`
 

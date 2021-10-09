@@ -74,6 +74,22 @@ eval (top@(ttyp, tval, tloc) : bot@(btyp, bval, bloc) : stack) ((OpType, "|", lo
 eval (top@(ttyp, tval, tloc) : bot@(btyp, bval, bloc) : stack) ((OpType, "&", loc) : code)
   | ttyp == BlnType && btyp == BlnType = eval ((BlnType, toStr (toBln tval && toBln bval), loc) : stack) code
   | otherwise = expect2Error (top, bot) "&" ([BlnType], [BlnType]) loc
+-- <
+eval (top@(ttyp, tval, tloc) : bot@(btyp, bval, bloc) : stack) ((OpType, "<", loc) : code)
+  | ttyp == IntType && btyp == IntType = eval ((BlnType, toStr (toInt bval < toInt tval), loc) : stack) code
+  | otherwise = expect2Error (top, bot) "<" ([IntType], [IntType]) loc
+-- >
+eval (top@(ttyp, tval, tloc) : bot@(btyp, bval, bloc) : stack) ((OpType, ">", loc) : code)
+  | ttyp == IntType && btyp == IntType = eval ((BlnType, toStr (toInt bval > toInt tval), loc) : stack) code
+  | otherwise = expect2Error (top, bot) ">" ([IntType], [IntType]) loc
+-- <
+eval (top@(ttyp, tval, tloc) : bot@(btyp, bval, bloc) : stack) ((OpType, "<=", loc) : code)
+  | ttyp == IntType && btyp == IntType = eval ((BlnType, toStr (toInt bval <= toInt tval), loc) : stack) code
+  | otherwise = expect2Error (top, bot) "<=" ([IntType], [IntType]) loc
+-- >
+eval (top@(ttyp, tval, tloc) : bot@(btyp, bval, bloc) : stack) ((OpType, ">=", loc) : code)
+  | ttyp == IntType && btyp == IntType = eval ((BlnType, toStr (toInt bval >= toInt tval), loc) : stack) code
+  | otherwise = expect2Error (top, bot) ">=" ([IntType], [IntType]) loc
 -- rest
 eval [] [] = []
 eval stack ((_, s, loc) : _) = libraError ("Cant evaluate" ++ s ++ "\nStack: \n" ++ formatLexedInfo stack) (Just loc)

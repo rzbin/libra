@@ -4,7 +4,7 @@ data Type = IntType | StrType | OpType | BlnType
   deriving (Eq, Show)
 
 ops :: [String]
-ops = ["+", "-", "*", "/", "print", "put", "dup", "!", "2dup", "swap", "over", "=", "|", "&"]
+ops = ["+", "-", "*", "/", "print", "put", "dup", "!", "2dup", "swap", "over", "=", "|", "&", "<", ">", "<=", ">="]
 
 type Token = (Type, String, Loc)
 
