@@ -109,7 +109,7 @@ World
 
 - `put` : Print the top stack element without a newline
 ```pascal
-"Hello" print "World" print
+"Hello" put "World" put
 ```
 yields
 ```
