@@ -5,7 +5,7 @@ data Type = IntType | StrType | BlnType | OpType | HghType | LowType
 
 -- OpType
 ops :: [String]
-ops = ["+", "-", "*", "/", "print", "put", "dup", "drop", "!", "2dup", "swap", "over", "=", "|", "&", "<", ">", "<=", ">=", "run"]
+ops = ["+", "-", "*", "/", "print", "put", "dup", "drop", "!", "2dup", "2drop", "swap", "over", "=", "|", "&", "<", ">", "<=", ">=", "run"]
 
 -- HghType
 highers :: [String]

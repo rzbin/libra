@@ -6,13 +6,14 @@ Heavily inspired by [Porth](https://github.com/tsoding/porth) and [Forth](<https
 Goals:
 - [x] Basic integer operations
 - [x] Data types "String" and "Boolean"
-- [ ] While loops
+- [x] While loops
 - [x] If statements
 - [ ] Function macros
 - [ ] Simple memory
 - [ ] Turing completeness
 
 ## Example
+Print numbers and words:
 ```pascal
 123 456 + print
 "Hello World!" print
@@ -21,6 +22,21 @@ yields
 ```
 579
 Hello World!
+```
+Print even numbers between 0 and 10
+```pascal
+10 0 while 2dup < run
+  "Number: " put dup print
+  2 +
+end
+```
+yields
+```
+Number: 0
+Number: 2
+Number: 4
+Number: 6
+Number: 8
 ```
 
 ## Usage
@@ -42,6 +58,20 @@ Currently supported data types are integers, strings, and booleans. Pushed onto 
 ```pascal
 123 "Hello World!" False
 ```
+
+### Control flow
+
+#### If statements
+
+`if <body> end`
+
+If checks if the top stack element is True, if so it executes the body, else it skips to end.
+
+#### While loops
+
+`while <cond> run <body> end`
+
+While checks if a certain condition is true, if so it runs the body and returns to the while, if not, it skips to end.
 
 ### Manipulation words
 
@@ -78,11 +108,23 @@ yields `3`
 ```
 yields `Hello Hello`
 
+- `drop` : Drop the top stack element
+```pascal
+"Hello" "World" drop print
+```
+yields `Hello`
+
 - `2dup` : Duplicate the two top stack element
 ```pascal
 10 2 2dup + print / print
 ```
 yields `12 5`
+
+- `2drop` : Drop the two top stack element
+```pascal
+"Hello" 10 "World" 2drop print
+```
+yields `Hello`
 
 - `swap` : Swap the two top stack element
 ```pascal

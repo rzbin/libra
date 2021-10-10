@@ -14,7 +14,7 @@ handleInput :: String -> String -> IO ()
 handleInput str fileName = putStr $ returnStackToString $ fst out
   where
     lexed = lexer str (fileName, 1, 1)
-    out = trace (formatLexedInfo lexed) $ eval [] lexed []
+    out = trace (formatLexedInfo lexed) $ eval [] lexed
 
 returnStackToString :: [Token] -> String
 returnStackToString [] = []
