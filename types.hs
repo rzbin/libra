@@ -1,14 +1,17 @@
 module Types where
 
-data Type = IntType | StrType | OpType | BlnType | HghType | LowType
+data Type = IntType | StrType | BlnType | OpType | HghType | LowType
   deriving (Eq, Show)
 
+-- OpType
 ops :: [String]
-ops = ["+", "-", "*", "/", "print", "put", "dup", "!", "2dup", "swap", "over", "=", "|", "&", "<", ">", "<=", ">="]
+ops = ["+", "-", "*", "/", "print", "put", "dup", "drop", "!", "2dup", "swap", "over", "=", "|", "&", "<", ">", "<=", ">=", "run"]
 
+-- HghType
 highers :: [String]
-highers = ["if"]
+highers = ["if", "while"]
 
+-- LowType
 lowers :: [String]
 lowers = ["end"]
 

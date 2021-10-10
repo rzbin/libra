@@ -7,7 +7,7 @@ Goals:
 - [x] Basic integer operations
 - [x] Data types "String" and "Boolean"
 - [ ] While loops
-- [ ] If statements
+- [x] If statements
 - [ ] Function macros
 - [ ] Simple memory
 - [ ] Turing completeness
