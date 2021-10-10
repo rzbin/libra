@@ -95,11 +95,17 @@ yields `8`
 ```
 yields `12`
 
-- `*` : Integer divide the two top stack elements
+- `/` : Integer divide the two top stack elements
 ```pascal
 10 3 / print
 ```
 yields `3`
+
+- `%` : Mod divide the two top stack elements
+```pascal
+10 3 % print
+```
+yields `1`
 
 #### Stack editing
 - `dup` : Duplicate the top stack element
@@ -208,13 +214,27 @@ yields `True`
 ```
 yields `False`
 
-#### Comments
+#### Memory
+Memory works using a memory pointer which can be increased and decreased.
+
+- `#` : Push the memory pointer to the stack
+- `s` : Store a token to a pointer
+- `r` : Read from a stack pointer
+```pascal
+# 4 s
+# 5 + "String" s
+# r print
+# 5 + r print
+```
+yields `4 "String"`
+
+### Comments
 - `~` : Ignores the rest of the line
 ```pascal
 123 123 + ~ Add the numbers together
 ```
 
-#### Function macros
+### Function macros
 
 `$ <name> [<body>]`
 

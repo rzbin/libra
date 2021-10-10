@@ -19,7 +19,8 @@ handleInput :: String -> String -> IO ()
 handleInput str fileName = putStr $ returnStackToString outputStack
   where
     lexed = lexer str fileName
-    (returnStack, leftStack) = if printLexed then trace (formatLexedInfo lexed) $ eval [] lexed else eval [] lexed
+    (returnStack, leftStack) = if printLexed then trace (formatLexedInfo lexed) $ evaluated else evaluated
+    evaluated = eval [] lexed []
     outputStack =
       if null leftStack
         then returnStack

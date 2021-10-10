@@ -1,11 +1,37 @@
 module Types where
 
-data Type = IntType | StrType | BlnType | OpType | HghType | LowType
+data Type = IntType | StrType | BlnType | OpType | HghType | LowType | PtrType
   deriving (Eq, Show)
 
 -- OpType
 ops :: [String]
-ops = ["+", "-", "*", "/", "print", "put", "dup", "drop", "!", "2dup", "2drop", "swap", "over", "=", "|", "&", "<", ">", "<=", ">=", "run"]
+ops =
+  [ "#",
+    "+",
+    "-",
+    "*",
+    "/",
+    "%",
+    "print",
+    "put",
+    "dup",
+    "drop",
+    "!",
+    "2dup",
+    "2drop",
+    "swap",
+    "over",
+    "=",
+    "|",
+    "&",
+    "<",
+    ">",
+    "<=",
+    ">=",
+    "run",
+    "s",
+    "r"
+  ]
 
 -- HghType
 highers :: [String]
