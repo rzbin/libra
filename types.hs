@@ -44,5 +44,5 @@ getType str loc
     isNumerical = foldr (\x -> (&&) (x `elem` "0123456789")) True
 
 libraError :: String -> Maybe Loc -> a
-libraError err Nothing = errorWithoutStackTrace ("\nERROR:\n" ++ err)
-libraError err (Just loc) = errorWithoutStackTrace ("\nERROR:\n" ++ formatLocation loc ++ " " ++ err)
+libraError err Nothing = errorWithoutStackTrace ("\n\n♎️ Libra error:\n" ++ err ++ "\n")
+libraError err (Just loc) = errorWithoutStackTrace ("\n\n♎️ Libra error:\n" ++ formatLocation loc ++ " " ++ err ++ "\n")

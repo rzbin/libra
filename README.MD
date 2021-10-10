@@ -8,7 +8,7 @@ Goals:
 - [x] Data types "String" and "Boolean"
 - [x] While loops
 - [x] If statements
-- [ ] Function macros
+- [x] Function macros
 - [ ] Simple memory
 - [ ] Turing completeness
 
@@ -213,3 +213,14 @@ yields `False`
 ```pascal
 123 123 + ~ Add the numbers together
 ```
+
+#### Function macros
+
+`$ <name> [<body>]`
+
+Expands name to body when used in code
+```pascal
+$ incr [1 +]
+10 incr print
+```
+yields `11`

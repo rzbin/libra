@@ -69,7 +69,7 @@ eval (top@(ttyp, tval, tloc) : bot@(btyp, bval, bloc) : stack) ((OpType, "/", lo
 -- 2dup
 eval full@(top : bot : _) ((OpType, "2dup", loc) : code) = eval (top : bot : full) code
 -- 2drop
-eval full@(top : bot : _) ((OpType, "2drop", loc) : code) = eval full code
+eval (top : bot : stack) ((OpType, "2drop", loc) : code) = eval stack code
 -- swap
 eval (top : bot : stack) ((OpType, "swap", loc) : code) = eval (bot : top : stack) code
 -- over
