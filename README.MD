@@ -9,7 +9,7 @@ Goals:
 - [x] While loops
 - [x] If statements
 - [x] Function macros
-- [ ] Simple memory
+- [x] Simple memory
 - [ ] Turing completeness
 
 ## Example

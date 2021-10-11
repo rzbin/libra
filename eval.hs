@@ -18,7 +18,7 @@ type CallStack = [(Token, [Token])]
 type Memory = [(Integer, Token)]
 
 -- eval Stack -> Code -> (Output stack, data Stack)
-eval :: Stack -> [Token] -> Memory -> (Stack, Stack)
+eval :: Stack -> [Token] -> Memory -> (Stack, Stack, Memory)
 -- int
 eval stack (token@(IntType, val, loc) : code) mem = eval (token : stack) code mem
 -- str
@@ -30,17 +30,17 @@ eval stack ((OpType, "#", loc) : code) mem = eval ((PtrType, "0", loc) : stack) 
 -- print
 eval (top@(ttyp, tval, tloc) : stack) ((OpType, "print", loc) : code) mem =
   if ttyp == IntType || ttyp == StrType || ttyp == BlnType
-    then ((StrType, tval ++ "\n", tloc) : os, ds)
+    then ((StrType, tval ++ "\n", tloc) : os, ds, rMem)
     else expectError top "print" [IntType, StrType, BlnType] loc
   where
-    (os, ds) = eval stack code mem
+    (os, ds, rMem) = eval stack code mem
 -- put
 eval (top@(ttyp, tval, tloc) : stack) ((OpType, "put", loc) : code) mem =
   if ttyp == IntType || ttyp == StrType || ttyp == BlnType
-    then ((StrType, tval, tloc) : os, ds)
+    then ((StrType, tval, tloc) : os, ds, rMem)
     else expectError top "put" [IntType, StrType, BlnType] loc
   where
-    (os, ds) = eval stack code mem
+    (os, ds, rMem) = eval stack code mem
 -- dup
 eval (top : stack) ((OpType, "dup", loc) : code) mem = eval (top : top : stack) code mem
 -- drop
@@ -134,22 +134,22 @@ eval ((BlnType, "False", _) : stack) (token@(HghType, "if", loc) : code) mem = e
 -- while
 eval stack (token@(HghType, "while", loc) : code) mem =
   -- trace ("while at " ++ formatLocation loc) $
-  (out, bSTACK)
+  (out, bSTACK, rMem)
   where
     (conditionCode, afterCondition) = findRun code 0
-    (condOutput, (ttyp, cond, _) : conditionStack) = eval stack conditionCode mem
+    (condOutput, (ttyp, cond, _) : conditionStack, condMem) = eval stack conditionCode mem
     (bodyCode, afterBody) = findEnd afterCondition 1
-    (bodyOutput, bodyStack) = eval conditionStack bodyCode mem
-    (rETURN, bSTACK) = if cond == "True" then eval bodyStack (token : code) mem else eval conditionStack afterBody mem
+    (bodyOutput, bodyStack, bodyMem) = eval conditionStack bodyCode condMem
+    (rETURN, bSTACK, rMem) = if cond == "True" then eval bodyStack (token : code) bodyMem else eval conditionStack afterBody condMem
     out = (if cond == "True" then bodyOutput else []) ++ condOutput ++ rETURN
 -- end
 eval stack (token@(LowType, "end", loc) : code) mem = eval stack code mem
 -- rest
-eval [] [] _ = ([], [])
+eval [] [] mem = ([], [], mem)
 eval stack ((_, s, loc) : _) _ = libraError ("Cant evaluate \"" ++ s ++ "\"\nStack: \n" ++ formatLexedInfo stack) (Just loc)
 -- eval _ [] cs | not $ null cs = libraError "Non-empty call stack at the end of code" Nothing
 -- eval stack [] [] = libraError ("Non-empty stack at the end of code" ++ "\nStack: \n" ++ formatLexedInfo stack) Nothing
-eval stack [] _ = ([], stack)
+eval stack [] mem = ([], stack, mem)
 
 -- eval _ _ _ = libraError "Something went wrong!" Nothing
 
