@@ -32,14 +32,6 @@ dup 0 = rA 0 = rB 0 = & & if 0 swap end
 drop
 ]
 
-~ TODO: remove this testing code
-~ 0 sA
-~ 0 sB
-~ "A: " put rA print
-~ "B: " put rB print
-~ 0 "C: " put dup print
-~ nextGen print 
-
 ~ Initialize array to be all 0's with a 1 at the end
 N 1 - 0 while 2dup > run
   # over + 0 s
@@ -47,8 +39,6 @@ N 1 - 0 while 2dup > run
 end # over + 1 s 2drop
 
 printArray
-
-
 
 N 1 while 2dup > run
   # r sA
