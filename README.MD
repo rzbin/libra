@@ -10,7 +10,7 @@ Goals:
 - [x] If statements
 - [x] Function macros
 - [x] Simple memory
-- [ ] Turing completeness
+- [x] Turing completeness (Runs [Rule110](https://en.wikipedia.org/wiki/Rule_110), see `examples/rule110.♎️`)
 
 ## Example
 Print numbers and words:
