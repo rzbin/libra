@@ -1,0 +1,23 @@
+~ EXTREMELY SLOW
+~ (385.56 secs, 475,470,650,304 bytes)
+
+$ N [ 1000 ]
+$ flip [
+    0 while over 0 > run
+        10 * over 10 % + 
+        swap 10 / swap
+    end swap drop
+]
+
+# 0 s
+
+0 while dup N < run
+    0 while dup N < run
+        2dup * dup flip = if
+            2dup * dup # r > if # swap s else drop end
+        end
+        1 +
+    end drop
+    1 +
+end drop
+# r print

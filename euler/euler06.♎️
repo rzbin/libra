@@ -1,0 +1,17 @@
+$ N [ 100 ]
+$ sumOfsq [
+    ~ sum num
+    0 swap while dup 0 > run
+        swap over dup * + swap
+        1 -
+    end drop
+]
+$ sqOfsum [
+    0 swap while dup 0 > run
+        swap over + swap
+        1 -
+    end drop
+    dup *
+]
+
+N sqOfsum N sumOfsq - print

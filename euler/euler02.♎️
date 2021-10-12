@@ -1,0 +1,17 @@
+$ N [ 10 ]
+
+$ readA [# r]
+$ strA  [# swap s]
+$ readB [# 1 + r]
+$ strB  [# 1 + swap s]
+
+0 strA
+1 strB
+
+0 ~ total sum
+while readB 4000000 <= run
+    readB readB readA + strB strA
+    
+    readA 2 % 0 = if readA + end
+end
+print

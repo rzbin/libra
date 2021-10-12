@@ -1,0 +1,10 @@
+$ N [ 1000 ]
+
+0 ~ total sum
+1 while dup N < run
+  dup 3 % 0 =
+  over 5 % 0 =
+  | if swap over + swap end
+  1 +
+end drop
+print

@@ -1,0 +1,10 @@
+$ N [ 600851475143 ]
+
+N 2 while 2dup > run
+    2dup % 0 = if
+        swap over / swap
+    else
+        1 +
+    end
+end drop
+print

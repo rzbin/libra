@@ -1,0 +1,21 @@
+~ Find the Nth prime, extremely slow
+
+$ N [ 10 ]
+$ isPrime [
+    dup 2 while 2dup > run
+        2dup % 0 = if
+            swap over / swap
+        else
+            1 +
+        end
+    end drop
+    =
+]
+# 0 s
+
+2 while # r N < run
+    dup isPrime if # # r 1 + s end
+    1 +
+end 1 -
+
+print

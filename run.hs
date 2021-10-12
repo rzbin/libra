@@ -6,7 +6,7 @@ import Util
 
 test = run "test.♎️"
 
-printLexed = True
+printLexed = False
 
 run :: FilePath -> IO ()
 run fileName = readFile fileName >>= \s -> handleInput s fileName
