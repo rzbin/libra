@@ -130,7 +130,9 @@ eval (top@(ttyp, tval, tloc) : stack) ((OpType, "r", loc) : code) mem =
 -- if true
 eval ((BlnType, "True", _) : stack) (token@(HghType, "if", loc) : code) mem = eval stack code mem
 -- if false
-eval ((BlnType, "False", _) : stack) (token@(HghType, "if", loc) : code) mem = eval stack (snd $findEnd code 1) mem
+eval ((BlnType, "False", _) : stack) (token@(HghType, "if", loc) : code) mem = eval stack (snd $findElseOrEnd code 1) mem
+-- else
+eval stack (token@(OpType, "else", loc) : code) mem = eval stack (snd $findEnd code 1) mem
 -- while
 eval stack (token@(HghType, "while", loc) : code) mem =
   -- trace ("while at " ++ formatLocation loc) $
@@ -187,6 +189,16 @@ findEnd (token@(tokenType, _, _) : code) height
   | tokenType == LowType = let (before, rest) = findEnd code (height - 1) in (token : before, rest)
   | otherwise = let (before, rest) = findEnd code height in (token : before, rest)
 findEnd [] _ = error "Cant find end"
+
+-- findElseOr end :: code -> height (1) -> (before, rest)
+findElseOrEnd :: [Token] -> Integer -> ([Token], [Token])
+findElseOrEnd code 0 = ([], code)
+findElseOrEnd ((OpType, "else", _) : code) 1 = ([], code)
+findElseOrEnd (token@(tokenType, _, _) : code) height
+  | tokenType == HghType = let (before, rest) = findEnd code (height + 1) in (token : before, rest)
+  | tokenType == LowType = let (before, rest) = findEnd code (height - 1) in (token : before, rest)
+  | otherwise = let (before, rest) = findElseOrEnd code height in (token : before, rest)
+findElseOrEnd [] _ = error "Cant find else or end"
 
 -- expect Tokens to test -> Operator -> Types they should be -> Location at which the test is happening -> error
 expect2Error :: (Token, Token) -> String -> ([Type], [Type]) -> Loc -> a

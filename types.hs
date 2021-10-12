@@ -30,7 +30,8 @@ ops =
     ">=",
     "run",
     "s",
-    "r"
+    "r",
+    "else"
   ]
 
 -- HghType

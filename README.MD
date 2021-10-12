@@ -67,6 +67,10 @@ Currently supported data types are integers, strings, and booleans. Pushed onto 
 
 If checks if the top stack element is True, if so it executes the body, else it skips to end.
 
+`if <true_body> else <false_body> end`
+
+If checks if the top stack element is True, if so it executes the true body and after skips to the end, else it will execute the else body.
+
 #### While loops
 
 `while <cond> run <body> end`
