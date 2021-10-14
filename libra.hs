@@ -1,10 +1,16 @@
 import Debug.Trace (trace, traceShow)
 import Eval
 import Lexer
+import System.Environment
+import System.IO
 import Types
 import Util
 
 test = run "test.♎️"
+
+main = do
+  [filename] <- getArgs
+  run filename
 
 printLexed = False
 
