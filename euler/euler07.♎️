@@ -1,6 +1,6 @@
 ~ Find the Nth prime, extremely slow
 
-$ N [ 10 ]
+$ N [ 100 ]
 $ isPrime [
     dup 2 while 2dup > run
         2dup % 0 = if
@@ -13,9 +13,9 @@ $ isPrime [
 ]
 # 0 s
 
-2 while # r N < run
+1 while # r N 1 - < run
+    2 +
     dup isPrime if # # r 1 + s end
-    1 +
-end 1 -
+end
 
 print
